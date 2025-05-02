@@ -1,50 +1,41 @@
-Feature: Add employee
+Feature: Adding employees
 
   Background:
-    #Given user is able to access to HRMS application
-    When usr enters a valid username and password
-    And user click on valid button
-    Then user able to see dashboard page
-    When user click on PIM pption
-    And use clicks on add employee option
+     #Given user is able to access HRMS application
+    When user enters valid username and password
+    And user clicks on login button
+    Then user is successfully logged in
+    When user clicks on PIM option
+    And user clicks on Add Employee option
 
-  @sprint1 @chikhi @smoke
-  Scenario: Adding employee by username and lastname
-    And user enter firstname and lastname
+  @add123
+  Scenario: Adding one employee
+    When user enters firstname and middlename and lastname
     And user clicks on save button
-    Then employee added successfully
-    @sprint2 @smoke @regression @chikhi
-  Scenario:  Adding employee by username middlename and lastname
+    Then user is added successfully
 
-    And user enter username middlename and lastname
+  @add
+  Scenario: Adding employee from feature file
+    When user enters "ella" and "ms" and "neopaney"
     And user clicks on save button
-    Then employee added successfully
-  @params
-  Scenario: adding employee using parameters
-    And user enter "miloud" and "chikhi" and "mc" in the application
-    And user clicks on save button
-    Then employee added successfully
+    Then user is added successfully
 
-  @exemple
-  Scenario Outline: adding a multiple emplyees
-    And user add "<firstname>" , "<middlename>" and "<lastname>"
+  @examples
+  Scenario Outline: Adding multiple emp from feature file
+    When user enters "<firstname>" and  "<middlename>" and "<lastname>" values
     And user clicks on save button
-    Then employee added successfully
+    Then user is added successfully
     Examples:
       | firstname | middlename | lastname |
-      | mark | mj | jacob |
-      | rob | rg | gulti |
-      | jeff | js | smith |
+      |sal        |ms          |chikhi    |
+      |kerry      |ms          |irfan     |
 
-  @data
-  Scenario: adding a multiple emplyees using data table
-    When user add a multiple employees using data table and save
-      | firstname | middlename | lastname |
-      | mark      | mj         | jacob    |
-      | rob       | rg         | gulti    |
-      | jeff      | js         | smith    |
+  @datatable
+  Scenario: Adding employees using data table
+    When user adds multiple employees from datatable and verify it is added
+      |firstname|middlename    |lastname  |
+      |sal        |ms          |chikhi    |
+      |kerry      |ms          |irfan     |
 
-  @excel
-  Scenario: Adding multiple employees using excel file
-    When user adds multiple employee from excel using "EmployeeData" and verify it
+
 

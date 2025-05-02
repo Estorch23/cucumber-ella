@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-public class CommonMethods  {
+public class CommonMethods extends PageInitializer {
 
     public static WebDriver driver;
 
@@ -25,7 +25,7 @@ public class CommonMethods  {
         switch (ConfigReader.read("browser")){
 
             case "Chrome":
-                ChromeOptions options = new ChromeOptions();
+                //ChromeOptions options = new ChromeOptions();
                // options.addArguments("--headless");
                 driver=new ChromeDriver();
                 break;
@@ -41,11 +41,15 @@ public class CommonMethods  {
             default:
                 throw new RuntimeException("Invalid Browser Name");
         }
+        
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.get(ConfigReader.read("url"));
         //this ,method will call all the objects
-       //initializePageObjects();
+       initializePageObjects();
+    }
+
+    private void initializePageObjects() {
     }
 
     public void closeBrowser() {
@@ -104,7 +108,7 @@ public class CommonMethods  {
 
         try {
             FileUtils.copyFile(sourceFile,
-                    new File(Constants.EXCEL_FILE_PATH +
+                    new File(Constants.SCREENSHOT_FILEPATH +
                             fileName+" "+
                             getTimeStamp("yyyy-MM-dd-HH-mm-ss")+".png"));
         } catch (IOException e) {
